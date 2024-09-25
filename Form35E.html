@@ -373,52 +373,14 @@
                 if (val) {
                     this.value = parseInt(val, 10).toLocaleString('en', { useGrouping: true });
                 }
+            }            
+        });    
+
+        $(document).on('focus', '.dollar', function () {
+            if (this.value === "0") {
+                this.select();
             }
-        });
-
-        /*
-        $(document).on('input', '.dollar', function () {
-            formatNumberWithCommas(this);
-        });
-
-        function formatNumberWithCommas(input) {
-            var val = input.value.replace(/,/g, '');
-
-            // Allow digits and period for decimal inputs
-            if ($(input).hasClass('dec')) {
-                // Replace invalid characters, but allow the period
-                val = val.replace(/[^0-9.]/g, '');
-
-                // Ensure only one period can be entered
-                const parts = val.split('.');
-                if (parts.length > 2) {
-                    val = parts[0] + '.' + parts.slice(1).join(''); // Keep only the first period
-                }
-
-                // Limit to two decimal places
-                if (val.includes('.')) {
-                    const [whole, decimal] = val.split('.');
-                    val = whole + '.' + (decimal.substring(0, 2)); // Only keep two decimal places
-                }
-
-                // Only convert to a float if there's a valid number
-                if (val) {
-                    input.value = parseFloat(val).toLocaleString('en', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
-                } else {
-                    input.value = '';
-                }
-            } else {
-                // Integer-only inputs
-                val = val.replace(/[^0-9]/g, ''); // Only allow numbers
-                val = parseInt(val, 10);
-                if (isNaN(val)) {
-                    input.value = '';
-                    return;
-                }
-                input.value = val.toLocaleString('en', { useGrouping: true });
-            }
-        }
-        */
+        });  
 
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
