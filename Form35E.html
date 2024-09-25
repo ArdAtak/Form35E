@@ -3,19 +3,443 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Page Title xx</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <title>Form 35E Calculator Demo</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <style>
+        .bordered {
+            border: solid 3px #808080;
+            border-radius: 10px;
+            display: inline-block;
+            padding: 10px;
+            margin-left: 25px;
+        }
+
+        .header {
+            font-family: Roboto;
+            color: #808080;
+            margin-left: 300px;
+            margin-top: 25px;
+        }
+
+        .form tr td {
+            padding: 5px;
+        }
+
+            .form tr td:first-child {
+                font-weight: bold;
+                color: dodgerblue;
+                font-size: 18px;
+            }
+
+            .form tr td span {
+                font-weight: bold;
+                font-size: 18px;
+                margin-top: 12px;
+            }
+
+        .form td {
+            white-space: nowrap; /*border: solid 1px #000000;*/
+        }
+
+        .form-control {
+            background-color: lightyellow;
+        }
+
+        .form span, .form input, .form select {
+            display: inline-block;
+        }
+
+        .form i {
+            font-size: 24px;
+            color: forestgreen;
+            font-weight: bolder;
+        }
+
+        .dollar {
+            width: 150px;
+        }
+
+        .dol-perc {
+            width: 50px;
+        }
+
+        .titled {
+            color: forestgreen !important;
+            font-size: 20px !important;
+            border-bottom: solid 1px #cccccc;
+        }
+
+        .calc {
+            color: forestgreen;
+            font-size: 20px;
+            top: -4px !important;
+            display: inline-block !important;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .dark {
+            color: #000000 !important;
+        }
+
+        .red {
+            color: crimson !important;
+        }
+
+        .link { font-weight: bold; font-size: 18px; margin-left: 90px; top: 25px; position: relative;}
+    </style>
 </head>
+
 <body>
-<div class="container">
-    <h1>Hello, World!</h1>
-    <p>This is your Form 35E Bootstrap page using jQuery! xxx</p>
-</div>
-    
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<!-- Bootstrap JS -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <h1 class="header">Form 35E Calculator Demo</h1>
+
+    <hr />
+
+    <div id="calc" class="container">
+        <table>
+            <tr valign="top">
+                <td>
+                    <div class="bordered">
+                        <table class="form">
+                            <tr>
+                                <td colspan="2" class="titled">Competing Offer Net Purchase Price</td>
+                            </tr>
+                            <tr>
+                                <td>PPCO</td>
+                                <td>
+                                    <span>$</span> <input class="form-control form-control-lg dollar" type="text" maxlength="11" step="1" min="0" placeholder="0" v-model="PPCO" />
+                                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Purchase Price of Competing Offer. If the Competing Offer contains an escalation provision, enter the maximum purchase price of the Competing Offer. The maximum price is on line 13 of Form 35E."></i>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>C1</td>
+                                <td>
+                                    <span>&nbsp;&nbsp;&nbsp;</span><input class="form-control form-control-lg dollar" type="text" maxlength="5" step="1" min="0" placeholder="0" v-model="C1V" />
+                                    <select class="form-control form-control-lg dol-perc" v-model="C1T">
+                                        <option value="$">$</option>
+                                        <option value="%">%</option>
+                                    </select>
+                                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Credits to Buyer in Form 41C. This is the credit amount, if any, requested by the Competing Offer Buyer in Form 41C."></i>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>C2</td>
+                                <td>
+                                    <span>&nbsp;&nbsp;&nbsp;</span><input class="form-control form-control-lg dollar" type="text" maxlength="5" step="1" min="0" placeholder="0" v-model="C2V" />
+                                    <select class="form-control form-control-lg dol-perc" v-model="C2T">
+                                        <option value="$">$</option>
+                                        <option value="%">%</option>
+                                    </select>
+                                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Credits to Buyer in Form 22A. This is the credit amount, if any, requested by the Competing Offer Buyer in Form 22A, Line 43."></i>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>C3</td>
+                                <td>
+                                    <span>&nbsp;&nbsp;&nbsp;</span><input class="form-control form-control-lg dollar" type="text" maxlength="5" step="1" min="0" placeholder="0" v-model="C3V" />
+                                    <select class="form-control form-control-lg dol-perc" v-model="C3T">
+                                        <option value="$">$</option>
+                                        <option value="%">%</option>
+                                    </select>
+                                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="BBC in Specific Term 17(b). This is the BBC amount, if any, requested by Competing Offer Buyer in the PSA in Specific Term 17(b) (or for some PSAs in Specific Term 18(b))."></i>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>C4</td>
+                                <td>
+                                    <span>&nbsp;&nbsp;&nbsp;</span><input class="form-control form-control-lg dollar" type="text" maxlength="5" step="1" min="0" placeholder="0" v-model="C4V" />
+                                    <select class="form-control form-control-lg dol-perc" v-model="C4T">
+                                        <option value="$">$</option>
+                                        <option value="%">%</option>
+                                    </select>
+                                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Any other concessions or credits to Buyer. These could include concessions or credits for repairs, escrow fees, interest rate buy downs, or other payments not in the fields above."></i>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>C5</td>
+                                <td>
+                                    <span>&nbsp;&nbsp;&nbsp;</span><input class="form-control form-control-lg dollar" type="text" maxlength="5" step="1" min="0" placeholder="0" v-model="C5V" />
+                                    <select class="form-control form-control-lg dol-perc" v-model="C5T">
+                                        <option value="$">$</option>
+                                        <option value="%">%</option>
+                                    </select>
+                                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Credits to Seller in Competing Offer. This is any amount credited to the seller in the Competing Offer. These could include buyer agreeing to pay the seller’s portion of the escrow fee, title fee."></i>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="dark">NPPCO</td>
+                                <td>
+                                    <span>&nbsp;&nbsp;&nbsp;</span>
+                                    <label class="calc">{{NPPCO()}}</label>
+                                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Competing Offer Net Purchase Price.  PPCO - (C1+C2+C3+C4) + C5"></i>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="bordered">
+                        <table class="form">
+                            <tr>
+                                <td colspan="2" class="titled">Escalated Offer's New Purchase Price</td>
+                            </tr>
+
+                            <tr>
+                                <td>E</td>
+                                <td>
+                                    <span>$</span> <input class="form-control form-control-lg dollar" type="text" maxlength="11" step="1" min="0" placeholder="0" v-model="E" />
+                                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Escalation Amount. This is the Escalation Amount in Form 35E, line 12 of the Escalated Offer."></i>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="dark">ENP</td>
+                                <td>
+                                    <span>&nbsp;&nbsp;&nbsp;</span>
+                                    <label class="calc">{{ENP()}}</label>
+                                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Escalated Net Price"></i>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>EC1</td>
+                                <td>
+                                    <span>&nbsp;&nbsp;&nbsp;</span><input class="form-control form-control-lg dollar" type="text" maxlength="5" step="1" min="0" placeholder="0" v-model="EC1V" />
+                                    <select class="form-control form-control-lg dol-perc" v-model="EC1T">
+                                        <option value="$">$</option>
+                                        <option value="%">%</option>
+                                    </select>
+                                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Credits to Buyer in Form 41C. This is the credit amount, if any, requested by the Escalated Offer Buyer in Form 41C."></i>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>EC2</td>
+                                <td>
+                                    <span>&nbsp;&nbsp;&nbsp;</span><input class="form-control form-control-lg dollar" type="text" maxlength="5" step="1" min="0" placeholder="0" v-model="EC2V" />
+                                    <select class="form-control form-control-lg dol-perc" v-model="EC2T">
+                                        <option value="$">$</option>
+                                        <option value="%">%</option>
+                                    </select>
+                                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Credits to Buyer in Form 22A. This is the credit amount, if any, requested by the Escalated Offer Buyer in Form 22A, Line 43."></i>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>EC3</td>
+                                <td>
+                                    <span>&nbsp;&nbsp;&nbsp;</span><input class="form-control form-control-lg dollar" type="text" maxlength="5" step="1" min="0" placeholder="0" v-model="EC3V" />
+                                    <select class="form-control form-control-lg dol-perc" v-model="EC3T">
+                                        <option value="$">$</option>
+                                        <option value="%">%</option>
+                                    </select>
+                                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="BBC in Specific Term 17(b). This is the BBC amount, if any, requested by Escalated Offer Buyer in the PSA in Specific Term 17(b) (or for some PSAs in Specific Term 18(b))."></i>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>EC4</td>
+                                <td>
+                                    <span>&nbsp;&nbsp;&nbsp;</span><input class="form-control form-control-lg dollar" type="text" maxlength="5" step="1" min="0" placeholder="0" v-model="EC4V" />
+                                    <select class="form-control form-control-lg dol-perc" v-model="EC4T">
+                                        <option value="$">$</option>
+                                        <option value="%">%</option>
+                                    </select>
+                                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Any other concessions or credits to Buyer. These could include concessions or credits for repairs, escrow fees, interest rate buy downs, or other payments not in the fields above."></i>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>EC5</td>
+                                <td>
+                                    <span>&nbsp;&nbsp;&nbsp;</span><input class="form-control form-control-lg dollar" type="text" maxlength="5" step="1" min="0" placeholder="0" v-model="EC5V" />
+                                    <select class="form-control form-control-lg dol-perc" v-model="EC5T">
+                                        <option value="$">$</option>
+                                        <option value="%">%</option>
+                                    </select>
+                                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Credits to Seller in Competing Offer. This is any amount credited to the seller in the Escalated Offer. These could include buyer agreeing to pay the seller’s portion of the escrow fee, title fee."></i>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="dark">EPP</td>
+                                <td>
+                                    <span>&nbsp;&nbsp;&nbsp;</span>
+                                    <label class="calc">{{EPP()}}</label>
+                                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Escalated Offer’s New Purchase Price"></i>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="bordered">
+                        <table class="form">
+                            <tr>
+                                <td colspan="2" class="titled">Maximum EPP Adjustments</td>
+                            </tr>
+                            <tr>
+                                <td>MEPP</td>
+                                <td>
+                                    <span>$</span> <input class="form-control form-control-lg dollar" type="text" maxlength="11" step="1" min="0" placeholder="0" v-model="MEPP" />
+                                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Maximum EPP. This is the Maximum EPP in Form 35E, line 13.  EPP may not exceed this amount."></i>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="red">AENP</td>
+                                <td>
+                                    <span>&nbsp;&nbsp;&nbsp;</span>
+                                    <label class="calc">{{AENP()}}</label>
+                                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Adjusted ENP if original EPP exceeds Maximum EPP."></i>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="red">AEPP</td>
+                                <td>
+                                    <span>&nbsp;&nbsp;&nbsp;</span>
+                                    <label class="calc">{{AEPP()}}</label>
+                                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Adjusted EPP if original EPP exceeds Maximum EPP."></i>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <br/>
+
+                    <a href="Form_35E_Specs.xlsx" class="link">Specs & Formulas</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            //alert('Custom JavaScript is working!');
+        });
+
+        $(document).on('input', '.dollar', function () {
+            formatNumberWithCommas(this);
+        });
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+
+        function formatNumberWithCommas(input) {
+            var val = input.value.replace(/,/g, '');
+            val = parseInt(val, 10);
+            if (isNaN(val)) {
+                input.value = '';
+                return;
+            }
+            input.value = val.toLocaleString('en', { useGrouping: true });
+        }
+
+        function i(str) {
+            str = str.toString().replace('$','');
+            return parseInt(str.replace(/,/g, ''), 10);
+        }
+
+        var app = new Vue({
+            el: '#calc',
+            data: {
+                PPCO: 0,
+                C1V: 0,
+                C1T: "$",
+                C2V: 0,
+                C2T: "$",
+                C3V: 0,
+                C3T: "$",
+                C4V: 0,
+                C4T: "$",
+                C5V: 0,
+                C5T: "$",
+                E: 0,
+                EC1V: 0,
+                EC1T: "$",
+                EC2V: 0,
+                EC2T: "$",
+                EC3V: 0,
+                EC3T: "$",
+                EC4V: 0,
+                EC4T: "$",
+                EC5V: 0,
+                EC5T: "$",
+                MEPP: 0
+            },
+            methods: {
+                C1() { return this.C1T === "$" ? i(this.C1V) : i(this.PPCO) * (i(this.C1V) / 100) },
+                C2() { return this.C2T === "$" ? i(this.C2V) : i(this.PPCO) * (i(this.C2V) / 100) },
+                C3() { return this.C3T === "$" ? i(this.C3V) : i(this.PPCO) * (i(this.C3V) / 100) },
+                C4() { return this.C4T === "$" ? i(this.C4V) : i(this.PPCO) * (i(this.C4V) / 100) },
+                C5() { return this.C5T === "$" ? i(this.C5V) : i(this.PPCO) * (i(this.C5V) / 100) },
+                NPPCO() {
+                    if (
+                        (this.C1T === "%" && this.C1V.length > 2)
+                        ||
+                        (this.C2T === "%" && this.C2V.length > 2)
+                        ||
+                        (this.C3T === "%" && this.C3V.length > 2)
+                        ||
+                        (this.C4T === "%" && this.C4V.length > 2)
+                        ||
+                        (this.C5T === "%" && this.C5V.length > 2)
+                    ) {
+                        alert("Percentages cannnot exceed 2 digits.");
+                        return "";
+                    }
+                    return "$" + (i(this.PPCO) - (this.C1() + this.C2() + this.C3() + this.C4()) + this.C5()).toLocaleString('en', { useGrouping: true });
+                },
+                ENP() { return "$" + (i(this.E) + i(this.NPPCO())).toLocaleString('en', { useGrouping: true }); },
+                EC1() { return this.EC1T === "$" ? i(this.EC1V) : i(this.ENP()) / (1 - (this.EC1V / 100)) - i(this.ENP()) },
+                EC2() { return this.EC2T === "$" ? i(this.EC2V) : i(this.ENP()) / (1 - (this.EC2V / 100)) - i(this.ENP()) },
+                EC3() { return this.EC3T === "$" ? i(this.EC3V) : i(this.ENP()) / (1 - (this.EC3V / 100)) - i(this.ENP()) },
+                EC4() { return this.EC4T === "$" ? i(this.EC4V) : i(this.ENP()) / (1 - (this.EC4V / 100)) - i(this.ENP()) },
+                EC5() { return this.EC5T === "$" ? i(this.EC5V) : i(this.ENP()) / (1 - (this.EC5V / 100)) - i(this.ENP()) },
+                EPP() {
+                    if (
+                        (this.EC1T === "%" && this.EC1V.length > 2)
+                        ||
+                        (this.EC2T === "%" && this.EC2V.length > 2)
+                        ||
+                        (this.EC3T === "%" && this.EC3V.length > 2)
+                        ||
+                        (this.EC4T === "%" && this.EC4V.length > 2)
+                        ||
+                        (this.EC5T === "%" && this.EC5V.length > 2)
+                    ) {
+                        alert("Percentages cannnot exceed 2 digits.");
+                        return "";
+                    }
+                    return "$" + (Math.round(i(this.ENP()) + (this.EC1() + this.EC2() + this.EC3() + this.EC4()) - this.EC5())).toLocaleString('en', { useGrouping: true });
+                },
+                AENP() {
+                    return i(this.EPP()) <= i(this.MEPP) || i(this.MEPP) === 0 ? "N/A" : "$" + (Math.round(i(this.MEPP) - (this.EC1() + this.EC2() + this.EC3() + this.EC4()) + this.EC5())).toLocaleString('en', { useGrouping: true });
+                },
+                AEPP() {
+                    return this.AENP() === "N/A" ? "N/A" : "$" + (Math.round(i(this.AENP()) + (this.EC1() + this.EC2() + this.EC3() + this.EC4()) - this.EC5())).toLocaleString('en', { useGrouping: true });
+                }
+            }
+        });
+    </script>
+
 </body>
 </html>
