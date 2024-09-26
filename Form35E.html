@@ -468,11 +468,11 @@
                 C4() { return this.C4T === "$" ? i(this.C4V) : i(this.PPCO) * (i(this.C4V) / 100) },
                 C5() { return this.C5T === "$" ? i(this.C5V) : i(this.PPCO) * (i(this.C5V) / 100) },
 
-                EC1() { return this.EC1T === "$" ? i(this.EC1V) : i(this.ENP()) / (1 - (this.EC1V / 100)) - i(this.ENP()) },
-                EC2() { return this.EC2T === "$" ? i(this.EC2V) : i(this.ENP()) / (1 - (this.EC2V / 100)) - i(this.ENP()) },
-                EC3() { return this.EC3T === "$" ? i(this.EC3V) : i(this.ENP()) / (1 - (this.EC3V / 100)) - i(this.ENP()) },
-                EC4() { return this.EC4T === "$" ? i(this.EC4V) : i(this.ENP()) / (1 - (this.EC4V / 100)) - i(this.ENP()) },
-                EC5() { return this.EC5T === "$" ? i(this.EC5V) : i(this.ENP()) / (1 - (this.EC5V / 100)) - i(this.ENP()) },
+                EC1() { return this.EC1T === "$" ? i(this.EC1V) : this.ENP_Value / (1 - (this.EC1V / 100)) - this.ENP_Value },
+                EC2() { return this.EC2T === "$" ? i(this.EC2V) : this.ENP_Value / (1 - (this.EC2V / 100)) - this.ENP_Value },
+                EC3() { return this.EC3T === "$" ? i(this.EC3V) : this.ENP_Value / (1 - (this.EC3V / 100)) - this.ENP_Value },
+                EC4() { return this.EC4T === "$" ? i(this.EC4V) : this.ENP_Value / (1 - (this.EC4V / 100)) - this.ENP_Value },
+                EC5() { return this.EC5T === "$" ? i(this.EC5V) : this.ENP_Value / (1 - (this.EC5V / 100)) - this.ENP_Value },
 
                 CalculateNPPCO() {
                     var error = false;
