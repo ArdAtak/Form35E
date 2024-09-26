@@ -365,13 +365,11 @@
             val = whole + '.' + (decimal.substring(0, 2)); // Only keep two decimal places
         }
 
+        if (val == "") { val = "0"; }
+
         if (val === ".") { val = "0."; }
 
         this.value = val; // Set the input value directly without formatting
-
-        if (val[val.length - 1] !== '.' && val.slice(-2) !== '.0') {
-            formatValue(this);
-        }
     });
 
     $(document).on('blur', '.dollar', function () {  
@@ -382,32 +380,22 @@
     $(document).on('change', '.dollar', function () {
         formatValue(this);
         app.Refresh();
-    });  
+    });
         
     $(document).on('change', '.dol-perc', function () {
-        $('.dollar').each(function () {  
-            var otherInput = $(this)[0];
-            let otherVal = otherInput.value.replace(/,/g, '');
+        formatValue($("#PPCO")[0]);
+        app.Refresh();
+    });
 
-            if (otherVal) {
-                let newValue;
-
-                if (otherInput.className.includes('dec')) {
-                    const fVal = parseFloat(otherVal);
-                    newValue = fVal.toLocaleString('en', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
-                } else {
-                    const iVal = parseInt(otherVal, 10);
-                    newValue = iVal.toLocaleString('en', { useGrouping: true });
-                }
-
-                otherInput.value = newValue;
-            }
-        });
+    $(document).on('blur', '.dol-perc', function () {
+        formatValue($("#PPCO")[0]);
         app.Refresh();
     });
 
     function formatValue(input) {
         let val = input.value.replace(/,/g, '');
+
+        if (val == null || val == "" || val == ".") { val = "0"; }
 
         if (val) {
             let formattedValue;
@@ -421,6 +409,9 @@
             }
 
             input.value = formattedValue;
+        }
+        else {
+            input.value = "0";
         }
 
         $('.dollar').each(function () {
@@ -440,10 +431,11 @@
                     }
 
                     $otherInput.value = newValue;
+                } else {
+                    $otherInput.value = "0";
                 }
             }
         });
-
     }
 
     $(document).on('focus', '.dollar', function () {
@@ -463,6 +455,12 @@
     function i(str) {
         str = str.toString().replace('$','');
         return parseInt(str.replace(/,/g, ''), 10);
+    }
+
+    function dec(str) {
+        str = str.toString().replace('$', '');
+        str = str.replace(/,/g, '');
+        return parseFloat(str);
     }
 
         var app = new Vue({
@@ -504,17 +502,17 @@
 
             },
             methods: {
-                C1() { return this.C1T === "$" ? i(this.C1V) : i(this.PPCO) * (i(this.C1V) / 100) },
-                C2() { return this.C2T === "$" ? i(this.C2V) : i(this.PPCO) * (i(this.C2V) / 100) },
-                C3() { return this.C3T === "$" ? i(this.C3V) : i(this.PPCO) * (i(this.C3V) / 100) },
-                C4() { return this.C4T === "$" ? i(this.C4V) : i(this.PPCO) * (i(this.C4V) / 100) },
-                C5() { return this.C5T === "$" ? i(this.C5V) : i(this.PPCO) * (i(this.C5V) / 100) },
+                C1() { return this.C1T === "$" ? i(this.C1V) : i(this.PPCO) * (dec(this.C1V) / 100) },
+                C2() { return this.C2T === "$" ? i(this.C2V) : i(this.PPCO) * (dec(this.C2V) / 100) },
+                C3() { return this.C3T === "$" ? i(this.C3V) : i(this.PPCO) * (dec(this.C3V) / 100) },
+                C4() { return this.C4T === "$" ? i(this.C4V) : i(this.PPCO) * (dec(this.C4V) / 100) },
+                C5() { return this.C5T === "$" ? i(this.C5V) : i(this.PPCO) * (dec(this.C5V) / 100) },
 
-                EC1() { return this.EC1T === "$" ? i(this.EC1V) : this.ENP_Value / (1 - (this.EC1V / 100)) - this.ENP_Value },
-                EC2() { return this.EC2T === "$" ? i(this.EC2V) : this.ENP_Value / (1 - (this.EC2V / 100)) - this.ENP_Value },
-                EC3() { return this.EC3T === "$" ? i(this.EC3V) : this.ENP_Value / (1 - (this.EC3V / 100)) - this.ENP_Value },
-                EC4() { return this.EC4T === "$" ? i(this.EC4V) : this.ENP_Value / (1 - (this.EC4V / 100)) - this.ENP_Value },
-                EC5() { return this.EC5T === "$" ? i(this.EC5V) : this.ENP_Value / (1 - (this.EC5V / 100)) - this.ENP_Value },
+                EC1() { return this.EC1T === "$" ? i(this.EC1V) : this.ENP_Value / (1 - (dec(this.EC1V) / 100)) - this.ENP_Value },
+                EC2() { return this.EC2T === "$" ? i(this.EC2V) : this.ENP_Value / (1 - (dec(this.EC2V) / 100)) - this.ENP_Value },
+                EC3() { return this.EC3T === "$" ? i(this.EC3V) : this.ENP_Value / (1 - (dec(this.EC3V) / 100)) - this.ENP_Value },
+                EC4() { return this.EC4T === "$" ? i(this.EC4V) : this.ENP_Value / (1 - (dec(this.EC4V) / 100)) - this.ENP_Value },
+                EC5() { return this.EC5T === "$" ? i(this.EC5V) : this.ENP_Value / (1 - (dec(this.EC5V) / 100)) - this.ENP_Value },
 
                 CalculateNPPCO() {
                     var error = false;
