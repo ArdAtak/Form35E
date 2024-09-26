@@ -109,7 +109,7 @@
                 <td colspan="2" class="titled">Competing Offer Net Purchase Price</td>
             </tr>
             <tr>
-                <td>PPCO</td>
+                <td>Purchase Price</td>
                 <td>
                     <span>$</span> <input class="form-control form-control-lg dollar" type="text" maxlength="11"  min="0" placeholder="0" v-model="PPCO" />
                     <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Purchase Price of Competing Offer. If the Competing Offer contains an escalation provision, enter the maximum purchase price of the Competing Offer. The maximum price is on line 13 of Form 35E."></i>
@@ -117,7 +117,7 @@
             </tr>
 
             <tr>
-                <td>C1</td>
+                <td>Buyer Credit (41C)</td>
                 <td>
                     <span>&nbsp;&nbsp;&nbsp;</span><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" step="1" min="0" placeholder="0" v-model="C1V" id="C1" />
                     <select class="form-control form-control-lg dol-perc" v-model="C1T">
@@ -129,7 +129,7 @@
             </tr>
 
             <tr>
-                <td>C2</td>
+                <td>Buyer Credit (22A)</td>
                 <td>
                     <span>&nbsp;&nbsp;&nbsp;</span><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" step="1" min="0" placeholder="0" v-model="C2V" id="C2" />
                     <select class="form-control form-control-lg dol-perc" v-model="C2T">
@@ -141,7 +141,7 @@
             </tr>
 
             <tr>
-                <td>C3</td>
+                <td>BBC (17B)</td>
                 <td>
                     <span>&nbsp;&nbsp;&nbsp;</span><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" step="1" min="0" placeholder="0" v-model="C3V" id="C13" />
                     <select class="form-control form-control-lg dol-perc" v-model="C3T">
@@ -153,7 +153,7 @@
             </tr>
 
             <tr>
-                <td>C4</td>
+                <td>Other Concessions</td>
                 <td>
                     <span>&nbsp;&nbsp;&nbsp;</span><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" step="1" min="0" placeholder="0" v-model="C4V" id="C4" />
                     <select class="form-control form-control-lg dol-perc" v-model="C4T">
@@ -165,7 +165,7 @@
             </tr>
 
             <tr>
-                <td>C5</td>
+                <td>Credits to Seller</td>
                 <td>
                     <span>&nbsp;&nbsp;&nbsp;</span><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" step="1" min="0" placeholder="0" v-model="C5V" id="C5" />
                     <select class="form-control form-control-lg dol-perc" v-model="C5T">
@@ -177,7 +177,7 @@
             </tr>
 
             <tr>
-                <td class="dark">NPPCO</td>
+                <td class="dark">Net Purchase Price</td>
                 <td>
                     <span>&nbsp;&nbsp;&nbsp;</span>
                     <label class="calc">{{NPPCO_Display}}</label>
@@ -196,7 +196,7 @@
             </tr>
 
             <tr>
-                <td>E</td>
+                <td>Escalation Amount</td>
                 <td>
                     <span>$</span> <input class="form-control form-control-lg dollar" type="text" maxlength="11" step="1" min="0" placeholder="0" v-model="E" />
                     <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Escalation Amount. This is the Escalation Amount in Form 35E, line 12 of the Escalated Offer."></i>
@@ -204,7 +204,7 @@
             </tr>
 
             <tr>
-                <td class="dark">ENP</td>
+                <td class="dark">Escalated Net Price</td>
                 <td>
                     <span>&nbsp;&nbsp;&nbsp;</span>
                     <label class="calc">{{ENP_Display}}</label>
@@ -213,7 +213,7 @@
             </tr>
 
             <tr>
-                <td>EC1</td>
+                <td>Buyer Credit (41C)</td>
                 <td>
                     <span>&nbsp;&nbsp;&nbsp;</span><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" step="1" min="0" placeholder="0" v-model="EC1V" id="EC1" />
                     <select class="form-control form-control-lg dol-perc" v-model="EC1T">
@@ -225,7 +225,7 @@
             </tr>
 
             <tr>
-                <td>EC2</td>
+                <td>Buyer Credit (22A)</td>
                 <td>
                     <span>&nbsp;&nbsp;&nbsp;</span><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" step="1" min="0" placeholder="0" v-model="EC2V" id="EC2" />
                     <select class="form-control form-control-lg dol-perc" v-model="EC2T">
@@ -237,7 +237,7 @@
             </tr>
 
             <tr>
-                <td>EC3</td>
+                <td>BBC (17B)</td>
                 <td>
                     <span>&nbsp;&nbsp;&nbsp;</span><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" step="1" min="0" placeholder="0" v-model="EC3V" id="EC3" />
                     <select class="form-control form-control-lg dol-perc" v-model="EC3T">
@@ -249,7 +249,7 @@
             </tr>
 
             <tr>
-                <td>EC4</td>
+                <td>Other Concessions</td>
                 <td>
                     <span>&nbsp;&nbsp;&nbsp;</span><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" step="1" min="0" placeholder="0" v-model="EC4V" id="EC4" />
                     <select class="form-control form-control-lg dol-perc" v-model="EC4T">
@@ -261,7 +261,7 @@
             </tr>
 
             <tr>
-                <td>EC5</td>
+                <td>Credits to Seller</td>
                 <td>
                     <span>&nbsp;&nbsp;&nbsp;</span><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" step="1" min="0" placeholder="0" v-model="EC5V" id="EC5" />
                     <select class="form-control form-control-lg dol-perc" v-model="EC5T">
@@ -273,7 +273,7 @@
             </tr>
 
             <tr>
-                <td class="dark">EPP</td>
+                <td class="dark">New Purchase Price</td>
                 <td>
                     <span>&nbsp;&nbsp;&nbsp;</span>
                     <label class="calc">{{EPP_Display}}</label>
@@ -291,7 +291,7 @@
                 <td colspan="2" class="titled">Maximum EPP Adjustments</td>
             </tr>
             <tr>
-                <td>MEPP</td>
+                <td>Maximum EPP</td>
                 <td>
                     <span>$</span> <input class="form-control form-control-lg dollar" type="text" maxlength="11" step="1" min="0" placeholder="0" v-model="MEPP" />
                     <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Maximum EPP. This is the Maximum EPP in Form 35E, line 13.  EPP may not exceed this amount."></i>
@@ -299,7 +299,7 @@
             </tr>
 
             <tr>
-                <td class="red">AENP</td>
+                <td class="red">Adjusted ENP</td>
                 <td>
                     <span>&nbsp;&nbsp;&nbsp;</span>
                     <label class="calc">{{AENP_Display}}</label>
@@ -308,7 +308,7 @@
             </tr>
 
             <tr>
-                <td class="red">AEPP</td>
+                <td class="red">Adjusted EPP</td>
                 <td>
                     <span>&nbsp;&nbsp;&nbsp;</span>
                     <label class="calc">{{AEPP_Display}}</label>
