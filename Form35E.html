@@ -379,10 +379,13 @@
         formatValue(this);
         app.Refresh();           
     });  
-
-    
+        
     $(document).on('change', '.dollar', function () {
         formatValue(this);
+        app.Refresh();
+    });
+
+    $(document).on('change', '.dol-perc', function () {
         app.Refresh();
     });
 
