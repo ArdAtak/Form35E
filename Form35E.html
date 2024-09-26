@@ -514,6 +514,12 @@
                 EC4() { return this.EC4T === "$" ? i(this.EC4V) : this.ENP_Value / (1 - (dec(this.EC4V) / 100)) - this.ENP_Value },
                 EC5() { return this.EC5T === "$" ? i(this.EC5V) : this.ENP_Value / (1 - (dec(this.EC5V) / 100)) - this.ENP_Value },
 
+                MC1() { return this.EC1T === "$" ? i(this.EC1V) : i(this.MEPP) * (dec(this.EC1V) / 100) },
+                MC2() { return this.EC2T === "$" ? i(this.EC2V) : i(this.MEPP) * (dec(this.EC2V) / 100) },
+                MC3() { return this.EC3T === "$" ? i(this.EC3V) : i(this.MEPP) * (dec(this.EC3V) / 100) },
+                MC4() { return this.EC4T === "$" ? i(this.EC4V) : i(this.MEPP) * (dec(this.EC4V) / 100) },
+                MC5() { return this.EC5T === "$" ? i(this.EC5V) : i(this.MEPP) * (dec(this.EC5V) / 100) },
+
                 CalculateNPPCO() {
                     var error = false;
 
@@ -607,13 +613,13 @@
                 },
 
                 CalculateAENP() {
-                    this.AENP_Value = this.EPP_Value <= i(this.MEPP) || i(this.MEPP) === 0 ? null : Math.round(i(this.MEPP) - (this.EC1() + this.EC2() + this.EC3() + this.EC4()) + this.EC5());
+                    this.AENP_Value = this.EPP_Value <= i(this.MEPP) || i(this.MEPP) === 0 ? null : Math.round(i(this.MEPP) - (this.MC1() + this.MC2() + this.MC3() + this.MC4()) + this.MC5());
 
                     this.AENP_Display = this.AENP_Value === null ? "N/A" : "$" + this.AENP_Value.toLocaleString('en', { useGrouping: true });
                 },
 
                 CalculateAEPP() {
-                    this.AEPP_Value = this.AENP_Value === null ? null : Math.round(i(this.AENP_Value) + (this.EC1() + this.EC2() + this.EC3() + this.EC4()) - this.EC5());
+                    this.AEPP_Value = this.AENP_Value === null ? null : i(this.MEPP);
 
                     this.AEPP_Display = this.AEPP_Value === null ? "N/A" : "$" + this.AEPP_Value.toLocaleString('en', { useGrouping: true });
                 },
