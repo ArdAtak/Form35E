@@ -21,7 +21,7 @@
         .header {
             font-family: Roboto;
             color: #808080;
-            margin-left: 300px;
+            margin-left: 50px;
             margin-top: 25px;
         }
 
@@ -90,7 +90,9 @@
             color: crimson !important;
         }
 
-        .link { font-weight: bold; font-size: 18px; margin-left: 90px; top: 25px; position: relative;}
+        .link { font-weight: bold; font-size: 18px; margin-left: 150px; top: 25px; position: relative;}
+
+        .container {margin-left: 50px;}
     </style>
 </head>
 
@@ -111,7 +113,7 @@
             <tr>
                 <td>Purchase Price</td>
                 <td>
-                    <span>$</span> <input class="form-control form-control-lg dollar" type="text" maxlength="11"  min="0" placeholder="0" v-model="PPCO" />
+                    <span>$</span> <input class="form-control form-control-lg dollar" type="text" maxlength="11" min="0" placeholder="0" v-model="PPCO" id="PPCO" />
                     <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Purchase Price of Competing Offer. If the Competing Offer contains an escalation provision, enter the maximum purchase price of the Competing Offer. The maximum price is on line 13 of Form 35E."></i>
                 </td>
             </tr>
@@ -198,7 +200,7 @@
             <tr>
                 <td>Escalation Amount</td>
                 <td>
-                    <span>$</span> <input class="form-control form-control-lg dollar" type="text" maxlength="11" step="1" min="0" placeholder="0" v-model="E" />
+                    <span>$</span> <input class="form-control form-control-lg dollar" type="text" maxlength="11" step="1" min="0" placeholder="0" v-model="E" id="E" />
                     <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Escalation Amount. This is the Escalation Amount in Form 35E, line 12 of the Escalated Offer."></i>
                 </td>
             </tr>
@@ -288,18 +290,18 @@
     <div class="bordered">
         <table class="form">
             <tr>
-                <td colspan="2" class="titled">Maximum EPP Adjustments</td>
+                <td colspan="2" class="titled">Max Escalate Price Adjustments</td>
             </tr>
             <tr>
-                <td>Maximum EPP</td>
+                <td>Max Escalated Price</td>
                 <td>
-                    <span>$</span> <input class="form-control form-control-lg dollar" type="text" maxlength="11" step="1" min="0" placeholder="0" v-model="MEPP" />
+                    <span>$</span> <input class="form-control form-control-lg dollar" type="text" maxlength="11" step="1" min="0" placeholder="0" v-model="MEPP" id="MEPP" />
                     <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Maximum EPP. This is the Maximum EPP in Form 35E, line 13.  EPP may not exceed this amount."></i>
                 </td>
             </tr>
 
             <tr>
-                <td class="red">Adjusted ENP</td>
+                <td class="red">Adjusted Escalated Net</td>
                 <td>
                     <span>&nbsp;&nbsp;&nbsp;</span>
                     <label class="calc">{{AENP_Display}}</label>
@@ -308,7 +310,7 @@
             </tr>
 
             <tr>
-                <td class="red">Adjusted EPP</td>
+                <td class="red">Adjusted Escalated Price</td>
                 <td>
                     <span>&nbsp;&nbsp;&nbsp;</span>
                     <label class="calc">{{AEPP_Display}}</label>
@@ -341,84 +343,85 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
 
 <script>
-        $(document).ready(function () {
+    $(document).ready(function () {
 
-        });
+    });
 
-        $(document).on('input', '.dollar', function () {
-            // Just handle the input and allow periods and numbers
-            let val = this.value.replace(/[^0-9.]/g, '');
+    $(document).on('input', '.dollar', function () {
+        var value = this.value;
 
-            // Ensure only one period can be entered
-            const parts = val.split('.');
-            if (parts.length > 2) {
-                val = parts[0] + '.' + parts.slice(1).join(''); // Keep only the first period
-            }
+        // Just handle the input and allow periods and numbers
+        let val = value.replace(/[^0-9.]/g, '');
 
-            // Limit to two decimal places
-            if (val.includes('.')) {
-                const [whole, decimal] = val.split('.');
-                val = whole + '.' + (decimal.substring(0, 2)); // Only keep two decimal places
-            }
-
-            if (val === ".") { val = "0."; }
-
-            this.value = val; // Set the input value directly without formatting
-
-            if (val[val.length - 1] !== '.' && val.slice(-2) !== '.0') {
-                formatValue(this);
-            }
-        });
-
-        var currentInput = null;
-
-        // Format the value when the input loses focus
-        $(document).on('blur', '.dollar', function () {   
-            formatValue(this);
-            app.Refresh();           
-        });  
-
-        $(document).on('change', '.dollar', function () {
-            formatValue(this);
-            app.Refresh();
-        }); 
-
-        function formatValue(input) {
-            let val = input.value.replace(/,/g, '');
-
-            if (val) {
-                let formattedValue;
-
-                if ($(input).hasClass('dec')) {
-                    const floatVal = parseFloat(val);
-                    formattedValue = floatVal.toLocaleString('en', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
-                } else {
-                    const intVal = parseInt(val, 10);
-                    formattedValue = intVal.toLocaleString('en', { useGrouping: true });
-                }
-
-                input.value = formattedValue;
-            }
+        // Ensure only one period can be entered
+        const parts = val.split('.');
+        if (parts.length > 2) {
+            val = parts[0] + '.' + parts.slice(1).join(''); // Keep only the first period
         }
 
-        $(document).on('focus', '.dollar', function () {
-            if (this.value === "0") {
-                this.select();
-            }
-        });  
-
-        $(document).on('blur', '.dol-perc', function () {
-            app.Refresh();
-        }); 
-
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
-
-        function i(str) {
-            str = str.toString().replace('$','');
-            return parseInt(str.replace(/,/g, ''), 10);
+        // Limit to two decimal places
+        if (val.includes('.')) {
+            const [whole, decimal] = val.split('.');
+            val = whole + '.' + (decimal.substring(0, 2)); // Only keep two decimal places
         }
+
+        if (val === ".") { val = "0."; }
+
+        this.value = val; // Set the input value directly without formatting
+
+        if (val[val.length - 1] !== '.' && val.slice(-2) !== '.0') {
+            formatValue(this);
+        }
+    });
+  
+     // Format the value when the input loses focus
+    $(document).on('blur', '.dollar', function () {  
+        formatValue(this);
+        app.Refresh();           
+    });  
+
+    
+    $(document).on('change', '.dollar', function () {
+        formatValue(this);
+        app.Refresh();
+    });
+
+    function formatValue(input) {
+        let val = input.value.replace(/,/g, '');
+
+        if (val) {
+            let formattedValue;
+
+            if ($(input).hasClass('dec')) {
+                const floatVal = parseFloat(val);
+                formattedValue = floatVal.toLocaleString('en', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+            } else {
+                const intVal = parseInt(val, 10);
+                formattedValue = intVal.toLocaleString('en', { useGrouping: true });
+            }
+
+            input.value = formattedValue;
+        }
+    }
+
+    $(document).on('focus', '.dollar', function () {
+        if (this.value === "0") {
+            this.select();
+        }
+    });  
+
+    $(document).on('blur', '.dol-perc', function () {
+        app.Refresh();
+    }); 
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+
+    function i(str) {
+        str = str.toString().replace('$','');
+        return parseInt(str.replace(/,/g, ''), 10);
+    }
 
         var app = new Vue({
             el: '#calc',
