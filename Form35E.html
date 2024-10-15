@@ -215,53 +215,66 @@
             </tr>
 
             <tr>
-                <td>Buyer Credit (41C)</td>
+                <td>Buyer Credit Added in $</td>
                 <td>
                     <span>&nbsp;&nbsp;&nbsp;</span><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" placeholder="0" v-model="EC1V" id="EC1" />
-                    <select class="form-control form-control-lg dol-perc" v-model="EC1T">
-                        <option value="$">$</option>
-                        <option value="%">%</option>
-                    </select>
-                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Credits to Buyer in Form 41C. This is the credit amount, if any, requested by the Escalated Offer Buyer in Form 41C."></i>
+                    <!--
+                        <select class="form-control form-control-lg dol-perc" v-model="EC1T">
+                            <option value="$">$</option>
+                            <option value="%">%</option>
+                        </select>
+                    -->
+                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Buyer credits addded in $"></i>
+                    <!-- title="Credits to Buyer in Form 41C. This is the credit amount, if any, requested by the Escalated Offer Buyer in Form 41C."-->
                 </td>
             </tr>
 
             <tr>
-                <td>Buyer Credit (22A)</td>
+                <td>Buyer Credit Subtracted in $</td>
                 <td>
                     <span>&nbsp;&nbsp;&nbsp;</span><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" placeholder="0" v-model="EC2V" id="EC2" />
-                    <select class="form-control form-control-lg dol-perc" v-model="EC2T">
-                        <option value="$">$</option>
-                        <option value="%">%</option>
-                    </select>
-                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Credits to Buyer in Form 22A. This is the credit amount, if any, requested by the Escalated Offer Buyer in Form 22A, Line 43."></i>
+                    <!--
+                        <select class="form-control form-control-lg dol-perc" v-model="EC2T">
+                            <option value="$">$</option>
+                            <option value="%">%</option>
+                        </select>
+                    -->
+                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Buyer credits subtracted in $"></i>
+                    <!-- title="Credits to Buyer in Form 22A. This is the credit amount, if any, requested by the Escalated Offer Buyer in Form 22A, Line 43."-->
                 </td>
             </tr>
 
             <tr>
-                <td>BBC (17B)</td>
+                <td>Buyer credit added as %</td>
                 <td>
                     <span>&nbsp;&nbsp;&nbsp;</span><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" placeholder="0" v-model="EC3V" id="EC3" />
-                    <select class="form-control form-control-lg dol-perc" v-model="EC3T">
-                        <option value="$">$</option>
-                        <option value="%">%</option>
-                    </select>
-                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="BBC in Specific Term 17(b). This is the BBC amount, if any, requested by Escalated Offer Buyer in the PSA in Specific Term 17(b) (or for some PSAs in Specific Term 18(b))."></i>
+                    <!--
+                        <select class="form-control form-control-lg dol-perc" v-model="EC3T">
+                            <option value="$">$</option>
+                            <option value="%">%</option>
+                        </select>
+                    -->
+                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Buyer Credit added as %"></i>
+                    <!-- BBC in Specific Term 17(b). This is the BBC amount, if any, requested by Escalated Offer Buyer in the PSA in Specific Term 17(b) (or for some PSAs in Specific Term 18(b))." -->
                 </td>
             </tr>
 
             <tr>
-                <td>Other Concessions</td>
+                <td>Buyer credit subtracted as %</td>
                 <td>
                     <span>&nbsp;&nbsp;&nbsp;</span><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" placeholder="0" v-model="EC4V" id="EC4" />
-                    <select class="form-control form-control-lg dol-perc" v-model="EC4T">
-                        <option value="$">$</option>
-                        <option value="%">%</option>
-                    </select>
-                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Any other concessions or credits to Buyer. These could include concessions or credits for repairs, escrow fees, interest rate buy downs, or other payments not in the fields above."></i>
+                    <!--
+                        <select class="form-control form-control-lg dol-perc" v-model="EC4T">
+                            <option value="$">$</option>
+                            <option value="%">%</option>
+                        </select>
+                    -->
+                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Buyer credit subtracted as %"></i>
+                    <!-- title="Any other concessions or credits to Buyer. These could include concessions or credits for repairs, escrow fees, interest rate buy downs, or other payments not in the fields above." -->
                 </td>
             </tr>
-
+            
+            <!--
             <tr>
                 <td>Credits to Seller</td>
                 <td>
@@ -273,6 +286,7 @@
                     <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Credits to Seller in Competing Offer. This is any amount credited to the seller in the Escalated Offer. These could include buyer agreeing to pay the seller’s portion of the escrow fee, title fee."></i>
                 </td>
             </tr>
+            -->
 
             <tr>
                 <td class="dark">New Purchase Price</td>
@@ -486,13 +500,14 @@
                 EC3T: "$",
                 EC4V: 0,
                 EC4T: "$",
-                EC5V: 0,
-                EC5T: "$",
+                //EC5V: 0,
+                //EC5T: "$",
                 MEPP: 0,
                 NPPCO_Value: 0,
                 NPPCO_Display:  "$0",
                 ENP_Value: 0,
                 ENP_Display: "$0",
+                ENPA: 0,
                 EPP_Value: 0,
                 EPP_Display: "$0",
                 AENP_Value: 0,
@@ -508,17 +523,39 @@
                 C4() { return this.C4T === "$" ? i(this.C4V) : i(this.PPCO) * (dec(this.C4V) / 100) },
                 C5() { return this.C5T === "$" ? i(this.C5V) : i(this.PPCO) * (dec(this.C5V) / 100) },
 
-                EC1() { return this.EC1T === "$" ? i(this.EC1V) : this.ENP_Value / (1 - (dec(this.EC1V) / 100)) - this.ENP_Value },
-                EC2() { return this.EC2T === "$" ? i(this.EC2V) : this.ENP_Value / (1 - (dec(this.EC2V) / 100)) - this.ENP_Value },
-                EC3() { return this.EC3T === "$" ? i(this.EC3V) : this.ENP_Value / (1 - (dec(this.EC3V) / 100)) - this.ENP_Value },
-                EC4() { return this.EC4T === "$" ? i(this.EC4V) : this.ENP_Value / (1 - (dec(this.EC4V) / 100)) - this.ENP_Value },
-                EC5() { return this.EC5T === "$" ? i(this.EC5V) : this.ENP_Value / (1 - (dec(this.EC5V) / 100)) - this.ENP_Value },
+                /*
+                EC1() { return this.EC1T === "$" ? i(this.EC1V) : dec(dec(this.ENP_Value) / (1.00 - (dec(this.EC1V) / 100.00)) - dec(this.ENP_Value)) },
+                EC2() { return this.EC2T === "$" ? i(this.EC2V) : dec(dec(this.ENP_Value) / (1.00 - (dec(this.EC2V) / 100.00)) - dec(this.ENP_Value)) },
+                EC3() { return this.EC3T === "$" ? i(this.EC3V) : dec(dec(this.ENP_Value) / (1.00 - (dec(this.EC3V) / 100.00)) - dec(this.ENP_Value)) },
+                EC4() { return this.EC4T === "$" ? i(this.EC4V) : dec(dec(this.ENP_Value) / (1.00 - (dec(this.EC4V) / 100.00)) - dec(this.ENP_Value)) },
+                EC5() { return this.EC5T === "$" ? i(this.EC5V) : dec(dec(this.ENP_Value) / (1.00 - (dec(this.EC5V) / 100.00)) - dec(this.ENP_Value)) },
+                */
 
-                MC1() { return this.EC1T === "$" ? i(this.EC1V) : i(this.MEPP) * (dec(this.EC1V) / 100) },
-                MC2() { return this.EC2T === "$" ? i(this.EC2V) : i(this.MEPP) * (dec(this.EC2V) / 100) },
-                MC3() { return this.EC3T === "$" ? i(this.EC3V) : i(this.MEPP) * (dec(this.EC3V) / 100) },
-                MC4() { return this.EC4T === "$" ? i(this.EC4V) : i(this.MEPP) * (dec(this.EC4V) / 100) },
-                MC5() { return this.EC5T === "$" ? i(this.EC5V) : i(this.MEPP) * (dec(this.EC5V) / 100) },
+                EC1() { return i(this.EC1V); },
+                EC2() { return i(this.EC2V); },
+                EC3() { return dec(dec(this.ENPA) / (1.00 - (dec(this.EC3V) / 100.00)) - dec(this.ENPA)); },
+                EC4() { return dec(dec(this.ENPA) / (1.00 - (dec(this.EC4V) / 100.00)) - dec(this.ENPA)); },
+
+                ECP() {
+                    var val = 0;
+
+                    if (this.EC3V > this.EC4V) {
+                        val = dec(dec(this.ENPA) / (1.00 - (dec(this.EC3V - this.EC4V) / 100.00)) - dec(this.ENPA));
+                    } else if (this.EC3V < this.EC4V) {
+                        val = dec(dec(this.ENPA) / (1.00 - (dec(this.EC4V - this.EC3V) / 100.00)) - dec(this.ENPA));
+                        val = val * -1;
+                    }
+
+                    return val;
+                },
+
+                //EC5() { return this.EC5T === "$" ? i(this.EC5V) : dec(dec(this.ENP_Value) / (1.00 - (dec(this.EC5V) / 100.00)) - dec(this.ENP_Value)) },
+
+                MC1() { return i(this.EC1V); },
+                MC2() { return i(this.EC2V); },
+                MC3() { return i(this.MEPP) * (dec(this.EC3V) / 100) },
+                MC4() { return i(this.MEPP) * (dec(this.EC4V) / 100) },
+                //MC5() { return this.EC5T === "$" ? i(this.EC5V) : i(this.MEPP) * (dec(this.EC5V) / 100) },
 
                 CalculateNPPCO() {
                     var error = false;
@@ -569,51 +606,59 @@
                     this.ENP_Display = "$" + this.ENP_Value.toLocaleString('en', { useGrouping: true });
                 },
 
+                CalculateENPA() {
+                    this.ENPA = this.ENP_Value + this.EC1() - this.EC2();
+                },
+
                 CalculateEPP() {
                     var error = false;
 
+                    /*
                     if ((this.EC1T === "%" && i(this.EC1V) > 100)) {
                         this.EC1V = 0;
                         $("#EC1").focus().select();
                         error = true;
                     }
-
+                    
                     if ((this.EC2T === "%" && i(this.EC2V) > 100)) {
                         this.EC2V = 0;
                         $("#EC2").focus().select();
                         error = true;
                     }
+                    */
 
-                    if ((this.EC3T === "%" && i(this.EC3V) > 100)) {
+                    if (i(this.EC3V) > 100) {
                         this.EC3V = 0;
                         $("#EC3").focus().select();
                         error = true;
                     }
 
-                    if ((this.EC4T === "%" && i(this.EC4V) > 100)) {
+                    if (i(this.EC4V) > 100) {
                         this.EC4V = 0;
                         $("#EC4").focus().select();
                         error = true;
                     }
 
+                    /*
                     if ((this.EC5T === "%" && i(this.EC5V) > 100)) {
                         this.EC5V = 0;
                         $("#EC5").focus().select();
                         error = true;
                     }
+                    */
 
                     if (error) {
                         alert("Percentages cannnot exceed 100.");
                         return;
                     }
 
-                    this.EPP_Value = Math.round(this.ENP_Value + (this.EC1() + this.EC2() + this.EC3() + this.EC4()) - this.EC5());
+                    this.EPP_Value = Math.round(this.ENPA + this.ECP());
 
                     this.EPP_Display = "$" + this.EPP_Value.toLocaleString('en', { useGrouping: true });
                 },
 
                 CalculateAENP() {
-                    this.AENP_Value = this.EPP_Value <= i(this.MEPP) || i(this.MEPP) === 0 ? null : Math.round(i(this.MEPP) - (this.MC1() + this.MC2() + this.MC3() + this.MC4()) + this.MC5());
+                    this.AENP_Value = this.EPP_Value <= i(this.MEPP) || i(this.MEPP) === 0 ? null : Math.round(i(this.MEPP) + this.MC1() + this.MC3() - this.MC2() - this.MC4());
 
                     this.AENP_Display = this.AENP_Value === null ? "N/A" : "$" + this.AENP_Value.toLocaleString('en', { useGrouping: true });
                 },
@@ -627,6 +672,7 @@
                 Refresh() {
                     this.CalculateNPPCO();
                     this.CalculateENP();
+                    this.CalculateENPA();
                     this.CalculateEPP();
                     this.CalculateAENP();
                     this.CalculateAEPP();
