@@ -94,6 +94,10 @@
             color: crimson !important;
         }
 
+        .blue {
+            color: dodgerblue;
+        }
+
         .link { font-weight: bold; font-size: 18px; margin-left: 150px; top: 25px; position: relative;}
 
         .container {margin-left: 50px;}
@@ -107,153 +111,164 @@
 
 <div id="calc" class="container">
 <table>
-<tr valign="top">
-<td>
-    <div class="bordered">
-        <table class="form">
-            <tr>
-                <td colspan="2" class="titled">Competing Offer Net Purchase Price</td>
-            </tr>
-            <tr>
-                <td>Competing Offer Purchase Price (or max $)</td>
-                <td>
-                    <input class="form-control form-control-lg dollar" type="text" maxlength="11" min="0" placeholder="0" v-model="PPCO" id="PPCO" />
-                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Purchase Price of Competing Offer. If the Competing Offer contains an escalation provision, enter the maximum purchase price of the Competing Offer. The maximum price is on line 13 of Form 35E."></i>
-                </td>
-            </tr>
+    <tr valign="top">
+        <td>
+            <div class="bordered">
+                <table class="form">
+                    <tr>
+                        <td colspan="2" class="titled">Competing Offer Net Purchase Price</td>
+                    </tr>
+                    <tr>
+                        <td>Competing Offer Purchase Price (or max $)</td>
+                        <td>
+                            <input class="form-control form-control-lg dollar" type="text" maxlength="11" min="0" placeholder="0" v-model="PPCO" id="PPCO" />
+                            <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Purchase Price of Competing Offer. If the Competing Offer contains an escalation provision, enter the maximum purchase price of the Competing Offer. The maximum price is on line 13 of Form 35E."></i>
+                        </td>
+                    </tr>
 
-            <tr>
-                <td class="dark">Buyer Credits (expressed as $)</td>
-                <td><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" placeholder="0" v-model="C1V" id="C1" /></td>
-            </tr>
+                    <tr>
+                        <td class="dark">Buyer Credits (expressed as $)</td>
+                        <td><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" placeholder="0" v-model="C1V" id="C1" /></td>
+                    </tr>
 
-            <tr>
-                <td class="dark">Buyer Credits (expressed as %)</td>
-                <td><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" placeholder="0" v-model="C2V" id="C2" /></td>
-            </tr>
+                    <tr>
+                        <td class="dark">Buyer Credits (expressed as %)</td>
+                        <td><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" placeholder="0" v-model="C2V" id="C2" /></td>
+                    </tr>
 
-            <tr>
-                <td class="dark">Seller Credits (expressed as $)</td>
-                <td><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" placeholder="0" v-model="C3V" id="C13" /></td>
-            </tr>
+                    <tr>
+                        <td class="dark">Seller Credits (expressed as $)</td>
+                        <td><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" placeholder="0" v-model="C3V" id="C13" /></td>
+                    </tr>
 
-            <tr>
-                <td class="dark">Seller Credits (expressed as %)</td>
-                <td><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" placeholder="0" v-model="C4V" id="C4" /></td>
-            </tr>
+                    <tr>
+                        <td class="dark">Seller Credits (expressed as %)</td>
+                        <td><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" placeholder="0" v-model="C4V" id="C4" /></td>
+                    </tr>
 
-            <tr>
-                <td class="red">Competing Offer Net Purchase Price</td>
-                <td>
-                    <label class="calc">{{NPPCO_Display}}</label>
-                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Competing Offer Net Purchase Price."></i>
-                </td>
-            </tr>
-        </table>
-    </div>
-</td>
+                    <tr>
+                        <td class="red">Competing Offer Net Purchase Price</td>
+                        <td>
+                            <label class="calc">{{NPPCO_Display}}</label>
+                            <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Competing Offer Net Purchase Price."></i>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </td>
 
-<td>
-    <div class="bordered">
-        <table class="form">
-            <tr>
-                <td colspan="2" class="titled">Escalated Offer New Purchase Price</td>
-            </tr>
+        <td>
+            <div class="bordered">
+                <table class="form">
+                    <tr>
+                        <td colspan="2" class="titled">Escalated Offer New Purchase Price</td>
+                    </tr>
 
-            <tr>
-                <td class="dark">Escalation Amount ($)</td>
-                <td>
-                    <input class="form-control form-control-lg dollar" type="text" maxlength="11" placeholder="0" v-model="E" id="E" />
-                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Escalation Amount. This is the Escalation Amount in Form 35E, line 12 of the Escalated Offer."></i>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="dark">Escalation Amount ($)</td>
+                        <td>
+                            <input class="form-control form-control-lg dollar" type="text" maxlength="11" placeholder="0" v-model="E" id="E" />
+                            <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Escalation Amount. This is the Escalation Amount in Form 35E, line 12 of the Escalated Offer."></i>
+                        </td>
+                    </tr>
 
-            <tr>
-                <td class="red">Escalated Net Price ($)</td>
-                <td>
-                    <label class="calc">{{ENP_Display}}</label>
-                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Escalated Net Price"></i>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="red">Escalated Net Price ($)</td>
+                        <td>
+                            <label class="calc">{{ENP_Display}}</label>
+                            <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Escalated Net Price"></i>
+                        </td>
+                    </tr>
 
-            <tr>
-                <td class="dark">Buyer Credits (presented as $)</td>
-                <td><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" placeholder="0" v-model="EC1V" id="EC1" /></td>
-            </tr>
+                    <tr>
+                        <td class="dark">Buyer Credits (presented as $)</td>
+                        <td><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" placeholder="0" v-model="EC1V" id="EC1" /></td>
+                    </tr>
 
-            <tr>
-                <td class="dark">Buyer Credits (presented as %)</td>
-                <td><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" placeholder="0" v-model="EC2V" id="EC2" /></td>
-            </tr>
+                    <tr>
+                        <td class="dark">Buyer Credits (presented as %)</td>
+                        <td><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" placeholder="0" v-model="EC2V" id="EC2" /></td>
+                    </tr>
 
-            <tr>
-                <td class="dark">Seller Credits (presented as $)</td>
-                <td><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" placeholder="0" v-model="EC3V" id="EC3" /></td>
-            </tr>
+                    <tr>
+                        <td class="dark">Seller Credits (presented as $)</td>
+                        <td><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" placeholder="0" v-model="EC3V" id="EC3" /></td>
+                    </tr>
 
-            <tr>
-                <td class="dark">Seller Credits (presented as %)</td>
-                <td><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" placeholder="0" v-model="EC4V" id="EC4" /></td>
-            </tr>
+                    <tr>
+                        <td class="dark">Seller Credits (presented as %)</td>
+                        <td><input class="form-control form-control-lg dollar dec" type="text" maxlength="6" placeholder="0" v-model="EC4V" id="EC4" /></td>
+                    </tr>
 
-            <tr>
-                <td>Potential Escalated Purchase Price</td>
-                <td>
-                    <label class="calc">{{EPP_Display}}</label>
-                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Escalated Offer’s New Purchase Price"></i>
-                </td>
-            </tr>
-        </table>
-    </div>
-</td>
+                    <tr>
+                        <td>Potential Escalated Purchase Price</td>
+                        <td>
+                            <label class="calc">{{EPP_Display}}</label>
+                            <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Escalated Offer’s New Purchase Price"></i>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </td>
 
-<td>
-    <div class="bordered">
-        <table class="form">
-            <tr>
-                <td colspan="2" class="titled">Max Escalated Price Adjustments</td>
-            </tr>
-            <tr>
-                <td>Max Escalated Price ($)</td>
-                <td>
-                    <input class="form-control form-control-lg dollar" type="text" maxlength="11" placeholder="0" v-model="MEPP" id="MEPP" />
-                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Maximum EPP. This is the Maximum EPP in Form 35E, line 13.  EPP may not exceed this amount."></i>
-                </td>
-            </tr>
+        <td>
+            <div class="bordered">
+                <table class="form">
+                    <tr>
+                        <td colspan="2" class="titled">Max Escalated Purchase Price</td>
+                    </tr>
+                    <tr>
+                        <td class="dark">Maximum Escalated Purchase Price ($)</td>
+                        <td>
+                            <input class="form-control form-control-lg dollar" type="text" maxlength="11" placeholder="0" v-model="MEPP" id="MEPP" />
+                            <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Maximum EPP. This is the Maximum EPP in Form 35E, line 13.  EPP may not exceed this amount."></i>
+                        </td>
+                    </tr>
 
-            <tr>
-                <td class="red">Adjusted Escalated Net</td>
-                <td>
-                    <label class="calc">{{AENP_Display}}</label>
-                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Adjusted ENP if original EPP exceeds Maximum EPP."></i>
-                </td>
-            </tr>
+                    <tr>
+                        <td>New Purchase Price</td>
+                        <td>
+                            <label class="calc">{{AENP_Display}}</label>
+                            <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Adjusted ENP if original EPP exceeds Maximum EPP."></i>
+                        </td>
+                    </tr>
 
-            <tr>
-                <td class="red">Adjusted Escalated Price</td>
-                <td>
-                    <label class="calc">{{AEPP_Display}}</label>
-                    <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Adjusted EPP if original EPP exceeds Maximum EPP."></i>
-                </td>
-            </tr>
-        </table>
-    </div>
+                    <tr>
+                        <td class="red">Escalated Net Price</td>
+                        <td>
+                            <label class="calc">{{AEPP_Display}}</label>
+                            <i class="bi bi-info-circle icon-large" data-toggle="tooltip" data-placement="top" title="Adjusted EPP if original EPP exceeds Maximum EPP.  Falls under Max Price Cap."></i>
+                        </td>
+                    </tr>
+                </table>
+            </div>
 
-    <br />
+            <br />
 
-    <button class="btn btn-primary btn-lg link" onclick="app.Refresh()">Run Calculations</button>
+            <button class="btn btn-primary btn-lg link" onclick="app.Refresh()">Run Calculations</button>
 
-    <br /><p /><br/>
+            <br /><p /><br/>
 
-    <a class="btn btn-primary btn-lg link" href="Form35E.html">Reset Calculator</a>
+            <a class="btn btn-primary btn-lg link" href="Form35E.html">Reset Calculator</a>
 
-    <br />
+            <br />
 
-    <br />
+            <br />
 
-    &nbsp;&nbsp;<a href="Form_35E_Specs.xlsx" class="link">Specs & Formulas</a>
-</td>
-</tr>
+            &nbsp;&nbsp;<a href="Form_35E_Specs.xlsx" class="link">Specs & Formulas</a>
+        </td>
+    </tr>
+    
+    <tr>
+        <td colspan="3">
+            <hr />
+            <span class="titled"><b>Broker Notes:</b></span>
+            <br />
+            If the Max Escalated Price is <b><i>less</i></b> than the Potential Escalated Purchase Price, then proceed to 3rd calculator on the right to determine the New Purchase Price
+            <br />
+            If the Max Escalated Price is <b><i>more</i></b> than the Potential Escalated Purchase Price, then the <b class="blue">New Purchase Price is {{EPP_Display}}</b>
+        </td>
+    </tr>
 </table>
 </div>
 
