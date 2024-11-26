@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <title>Form 35E Calculator Demo - Version 2.0</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+
+    <style>
+
+        body {
+            text-align: center;
+            font-size: 14px;
+            font-family: Arial, Helvetica, sans-serif;
+            padding-top: 25px;
+        }
+
+        h1 {
+            margin-top: 20px;
+            font-family: Roboto, sand-serif;
+            color: #678849;
+        }
+
+        .calculator {
+            border: solid 2px #ACB3B8;
+            border-radius: 7px;
+            padding: 20px;
+            text-align: left;
+            width: 950px;
+            margin: 20px auto;
+        }
+
+        .btn-add {font-weight: bold;}
+
+        .calculator table tr td {
+            vertical-align: top;
+            padding: 5px;
+        }
+
+        .calculator table tr td:first-child {
+            font-weight: bold;
+            color: #545E5D;
+            font-size: 16px;
+        }
+
+        .calculator table tr td:nth-child(2),
+        .calculator table tr td:nth-child(3),
+        .calculator table tr td:nth-child(5) {
+            font-size: 16px;
+            padding-top: 8px;
+            font-weight: bold;
+        }
+
+        .fine {
+            font-weight: normal;
+            color: #999999;
+        }
+
+        .indent {padding-left: 50px !important;}
+
+        input {
+            border: solid 1px #cccccc;
+            border-radius: 5px;
+            color: #545E5D;
+            font-weight: bold;
+            background-color:aliceblue;
+            font-size: 16px;
+            height: 30px;
+            width: 120px;
+            padding: 5px;
+        }
+
+        .calculated {
+            background-color: #f8f9fa;
+            color: #6c757d;
+            font-weight: bold;
+            border: solid 1px #ced4da;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+
+    <img src="Logo.png"/>
+
+    <h1>NWMLS Form 35E Calculator Demo - Version 2.0</h1>
+
+    <div id="calculators">
+        <!-- ========== CALCULATORS ========== -->
+        <div v-for="(calc, index) in Calculators" :key="calc.id">
+            <calculator/>
+        </div>
+
+        <button class="btn btn-primary btn-add" @click="AddCalculator">Add New Calculator For Comparison</button>
+    </div>
+    
+    <div class="calculator" id="calc">
+        <h4>NEW PURCHASE PRICE FORMULAS</h4>
+
+        a) Competing Offer Net Purchase Price (F):
+        <li>F = A - (A * C/100) + (A * E/100) – B + D</li>
+
+        <br />
+
+        b) This offer’s Escalated Base (H):
+        <li>H = F + G</li>
+
+        <br />
+
+        c) This offer’s Escalated Purchase Price (prior to Max Purchase Price) (M):
+        <li>M = H + (A * J/100) – (A * L/100) + I – K</li>
+        <li>
+            The credits expressed as a percentage of purchase price from both the Competing Offer and this offer are calculated based on the Competing Offer Purchase Price.
+            At closing, the amount Seller pays as percentage credits for this offer will be higher because they will be calculated based on the New Purchase Price.
+            The difference is Seller’s expense of escalation.
+        </li>
+
+        <br />
+
+        d) If this offer’s Maximum Purchase Price (N) is equal to or greater than this offer’s Escalated Purchase Price (M):
+        <li>This offer’s New Purchase Price (P) will be the amount from line (M).</li>
+        <li>This offer’s Net Price (O) will be: O = M + (M * L/100) – (M * J/100) – I + K</li>
+
+        <br />
+
+        e) If this offer’s Maximum Purchase Price (N) is less than this offer’s Escalated Purchase Price (M):
+        <li>This offer’s New Purchase Price (P) will be the same number as the Maximum Purchase Price (N).</li>
+        <li>This offer’s Net Price (O) will be: O = N + (N * L/100) – (N * J/100) – I + K</li>
+    </div>
+
+    <!-- ========== TEMPLATES ========== -->
+    <template id="calculator-template">
+        <div class="calculator">
+            <table>
+                <tr>
+                    <td>
+                        A. Competing Offer Purchase Price
+                        <br />
+                        <label class="fine">(or the maximum purchase price of the Competing Offer if it contains an escalation provision)</label>
+                    </td>
+                    <td></td>
+                    <td>$</td>
+                    <td><input type="text" v-model.lazy="A" maxlength="11" placeholder="0" v-validate-number="'whole'" /></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>Competing Offer's:</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td class="indent">B. Credits to Buyer <label class="fine">($ amount)</label></td>
+                    <td>-</td>
+                    <td>$</td>
+                    <td><input type="text" v-model.lazy="B" maxlength="11" placeholder="0" v-validate-number="'whole'" /></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td class="indent">C. Credits to Buyer <label class="fine">(% of purchase price)</label></td>
+                    <td>-</td>
+                    <td></td>
+                    <td><input type="text" v-model.lazy="C" maxlength="4" placeholder="0" v-validate-number="'decimal'" /></td>
+                    <td>%</td>
+                </tr>
+
+                <tr>
+                    <td class="indent">D. Credits to Seller <label class="fine">($ amount)</label></td>
+                    <td>+</td>
+                    <td>$</td>
+                    <td><input type="text" v-model.lazy="D" maxlength="11" placeholder="0" v-validate-number="'whole'" /></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td class="indent">E. Credits to Seller <label class="fine">(% of purchase price)</label></td>
+                    <td>+</td>
+                    <td></td>
+                    <td><input type="text" v-model.lazy="E" maxlength="4" placeholder="0" v-validate-number="'decimal'" /></td>
+                    <td>%</td>
+                </tr>
+
+                <tr><td colspan="5"></td></tr>
+
+                <tr>
+                    <td>
+                        F. Competing Offer Net Purchase Price
+                        <label class="fine">(see <a href="#calc">Formula [a]</a>)</label>
+                    </td>
+                    <td></td>
+                    <td>$</td>
+                    <td><input type="text" :value="F" class="calculated" readonly /></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        G. Escalation Amount
+                        <label class="fine">(amount from line 11 of Buyer's Form 35E)</label>
+                    </td>
+                    <td>+</td>
+                    <td>$</td>
+                    <td><input type="text" v-model.lazy="G" maxlength="11" placeholder="0" v-validate-number="'whole'" /></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        H. Escalated Base
+                        <label class="fine">(this offer - see <a href="#calc">Formula [b]</a>)</label>
+                    </td>
+                    <td></td>
+                    <td>$</td>
+                    <td><input type="text" :value="H" class="calculated" readonly /></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>This Offer's:</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td class="indent">I. Credits to Buyer <label class="fine">($ amount)</label></td>
+                    <td>+</td>
+                    <td>$</td>
+                    <td><input type="text" v-model.lazy="I" maxlength="11" placeholder="0" v-validate-number="'whole'" /></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td class="indent">J. Credits to Buyer <label class="fine">(% of purchase price)</label></td>
+                    <td>+</td>
+                    <td></td>
+                    <td><input type="text" v-model.lazy="J" maxlength="4" placeholder="0" v-validate-number="'decimal'" /></td>
+                    <td>%</td>
+                </tr>
+
+                <tr>
+                    <td class="indent">K. Credits to Seller <label class="fine">($ amount)</label></td>
+                    <td>-</td>
+                    <td>$</td>
+                    <td><input type="text" v-model.lazy="K" maxlength="11" placeholder="0" v-validate-number="'whole'" /></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td class="indent">L. Credits to Seller <label class="fine">(% of purchase price)</label></td>
+                    <td>-</td>
+                    <td></td>
+                    <td><input type="text" v-model.lazy="L" maxlength="4" placeholder="0" v-validate-number="'decimal'" /></td>
+                    <td>%</td>
+                </tr>
+
+                <tr><td colspan="5"></td></tr>
+
+                <tr>
+                    <td>
+                        M. Escalated Purchase Price
+                        <label class="fine">(this offer – prior to Max Purchase Price limit - see <a href="#calc">Formula [c]</a>)</label>
+                    </td>
+                    <td></td>
+                    <td>$</td>
+                    <td><input type="text" :value="M" class="calculated" readonly /></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        N. Maximum Purchase Price
+                        <label class="fine">(amount from line 13 of Buyer’s Form 35E)</label>
+                    </td>
+                    <td></td>
+                    <td>$</td>
+                    <td><input type="text" v-model.lazy="N" maxlength="11" placeholder="0" v-validate-number="'whole'" /></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        O. Net Price
+                        <label class="fine">(this offer – including Max Purchase Price limit - see <a href="#calc">Formulas [d] and [e]</a>)</label>
+                    </td>
+                    <td></td>
+                    <td>$</td>
+                    <td><input type="text" :value="O" class="calculated" readonly /></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        P. New Purchase Price
+                        <label class="fine">(this offer - see Formulas [d] and [e])</label>
+                    </td>
+                    <td></td>
+                    <td>$</td>
+                    <td><input type="text" :value="P" class="calculated" readonly /></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </template>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.5.12/vue.global.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+
+    <script type="text/javascript" language="javascript">
+        // Component
+        const Calculator = {
+            template: "#calculator-template",
+            data() {
+                return {
+                    A: 0,
+                    B: 0,
+                    C: 0,
+                    D: 0,
+                    E: 0,
+                    G: 0,
+                    I: 0,
+                    J: 0,
+                    K: 0,
+                    L: 0,
+                    N: 0
+                };
+            },
+            computed: {
+                F() {
+                    const a = this.parse(this.A);
+                    const b = this.parse(this.B);
+                    const c = this.parse(this.C);
+                    const d = this.parse(this.D);
+                    const e = this.parse(this.E);
+
+                    const percPlus = a * (e / 100);
+                    const percMinus = a * (c / 100);
+
+                    return this.format(Math.round(a + percPlus - percMinus - b + d));
+                },
+                H() {
+                    const f = this.parse(this.F);
+                    const g = this.parse(this.G);
+
+                    return this.format(Math.round(f + g));
+                },
+                M() {
+                    const a = this.parse(this.A);
+                    const h = this.parse(this.H);
+                    const i = this.parse(this.I);
+                    const j = this.parse(this.J);
+                    const k = this.parse(this.K);
+                    const l = this.parse(this.L);
+
+                    const percPlus = a * (j / 100);
+                    const percMinus = a * (l / 100);
+
+                    return this.format(Math.round(h + percPlus - percMinus + i - k));                    
+                },
+                O() {                    
+                    const i = this.parse(this.I);
+                    const j = this.parse(this.J);
+                    const k = this.parse(this.K);
+                    const l = this.parse(this.L);
+                    const m = this.parse(this.M);
+                    const n = this.parse(this.N);
+
+                    if (n >= m) {
+                        const percPlus = m * (l / 100);
+                        const percMinus = m * (j / 100);
+
+                        return this.format(Math.round(m + percPlus - percMinus - i + k));
+                    } else {
+                        const percPlus = n * (l / 100);
+                        const percMinus = n * (j / 100);
+
+                        return this.format(Math.round(n + percPlus - percMinus - i + k));
+                    }
+                },
+                P() {
+                    const n = this.parse(this.N);
+                    const m = this.parse(this.M);
+
+                    if (n >= m) {
+                        return this.format(m);
+                    } else {
+                        return this.format(n);
+                    }
+                }
+            },
+            methods: {
+                parse(value) {
+                    return parseFloat(value.toString().replace(/,/g, '')) || 0;
+                },
+                format(value) {
+                    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                }
+            },
+            directives: {
+                validateNumber: {
+                    beforeMount(el, binding) {
+                        const type = binding.value;
+
+                        function enforceLimit() {
+                            let newValue = el.value;
+
+                            if (type === 'whole') {
+                                newValue = newValue.replace(/[^0-9]/g, '').replace(/^0+(?!$)/, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                            } else if (type === 'decimal') {
+                                newValue = newValue.replace(/[^0-9.]/g, '').replace(/^0+(?=\d)/, '').replace(/^(\d*\.\d{1,2}).*$/, '$1'); 
+
+                                if (newValue.indexOf('.') !== newValue.lastIndexOf('.')) {
+                                    newValue = newValue.slice(0, newValue.lastIndexOf('.'));
+                                }
+                            }
+                            
+                            el.value = newValue;
+                        }
+
+                        function handleEmpty() {
+                            if (el.value.trim() === '') {
+                                el.value = '0';
+                            }
+                        }
+                        
+                        el.addEventListener('input', enforceLimit);
+                        el.addEventListener('blur', handleEmpty);
+                                                
+                        enforceLimit();
+                    }
+                }
+            },/*,
+            methods: {}*/
+        };
+
+        // Main Controller
+        const app = Vue.createApp({
+            data() {
+                return {
+                    Variable: "Value",
+                    Calculators: [{id: 1}]
+                };
+            },
+            methods: {
+                AddCalculator() {
+                    const newId = this.Calculators.length + 1;
+                    this.Calculators.push({ id: newId });
+                },
+            }
+        });
+
+        // Register Components
+        app.component('calculator', Calculator);
+
+        // Mount the Vue app
+        app.mount('#calculators');
+    </script>
+
+</body>
+</html>
