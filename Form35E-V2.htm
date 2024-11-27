@@ -24,13 +24,23 @@
             color: #678849;
         }
 
+        .calculators {
+            text-align: center;
+            width: 100%;
+            font-size: 0;   
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
         .calculator {
             border: solid 2px #ACB3B8;
             border-radius: 7px;
             padding: 20px;
             text-align: left;
-            width: 950px;
-            margin: 20px auto;
+            width: 620px;
+            display: inline-block;
+            margin: 20px;
         }
 
         .btn-add {font-weight: bold;}
@@ -85,19 +95,23 @@
 
 <body>
 
-    <img src="Logo.png"/>
+    <img src="Logo.png" />
 
     <h1>NWMLS Form 35E Calculator Demo - Version 2.0</h1>
 
     <div id="calculators">
         <!-- ========== CALCULATORS ========== -->
-        <div v-for="(calc, index) in Calculators" :key="calc.id">
-            <calculator/>
+        <div class="calculators">
+            <div v-for="(calc, index) in Calculators" :key="calc.id">
+                <calculator />
+            </div>
         </div>
-
+        
         <button class="btn btn-primary btn-add" @click="AddCalculator">Add New Calculator For Comparison</button>
     </div>
+
     
+
     <div class="calculator" id="calc">
         <h4>NEW PURCHASE PRICE FORMULAS</h4>
 
@@ -140,7 +154,11 @@
                     <td>
                         A. Competing Offer Purchase Price
                         <br />
-                        <label class="fine">(or the maximum purchase price of the Competing Offer if it contains an escalation provision)</label>
+                        <label class="fine">
+                            (or the maximum purchase price of the Competing
+                            <br />
+                            Offer if it contains an escalation provision)
+                        </label>
                     </td>
                     <td></td>
                     <td>$</td>
@@ -193,6 +211,7 @@
                 <tr>
                     <td>
                         F. Competing Offer Net Purchase Price
+                        <br />
                         <label class="fine">(see <a href="#calc">Formula [a]</a>)</label>
                     </td>
                     <td></td>
@@ -204,6 +223,7 @@
                 <tr>
                     <td>
                         G. Escalation Amount
+                        <br />
                         <label class="fine">(amount from line 11 of Buyer's Form 35E)</label>
                     </td>
                     <td>+</td>
@@ -215,6 +235,7 @@
                 <tr>
                     <td>
                         H. Escalated Base
+                        <br />
                         <label class="fine">(this offer - see <a href="#calc">Formula [b]</a>)</label>
                     </td>
                     <td></td>
@@ -268,7 +289,8 @@
                 <tr>
                     <td>
                         M. Escalated Purchase Price
-                        <label class="fine">(this offer – prior to Max Purchase Price limit - see <a href="#calc">Formula [c]</a>)</label>
+                        <br />
+                        <label class="fine">(this offer – prior to Max Purchase Price limit<br />See <a href="#calc">Formula [c]</a>)</label>
                     </td>
                     <td></td>
                     <td>$</td>
@@ -279,6 +301,7 @@
                 <tr>
                     <td>
                         N. Maximum Purchase Price
+                        <br />
                         <label class="fine">(amount from line 13 of Buyer’s Form 35E)</label>
                     </td>
                     <td></td>
@@ -290,7 +313,8 @@
                 <tr>
                     <td>
                         O. Net Price
-                        <label class="fine">(this offer – including Max Purchase Price limit - see <a href="#calc">Formulas [d] and [e]</a>)</label>
+                        <br />
+                        <label class="fine">(this offer – including Max Purchase Price<br />See <a href="#calc">Formulas [d] & [e]</a>)</label>
                     </td>
                     <td></td>
                     <td>$</td>
@@ -301,7 +325,8 @@
                 <tr>
                     <td>
                         P. New Purchase Price
-                        <label class="fine">(this offer - see Formulas [d] and [e])</label>
+                        <br />
+                        <label class="fine">(this offer - see <a href="#calc">Formulas [d] & [e])</a></label>
                     </td>
                     <td></td>
                     <td>$</td>
@@ -365,9 +390,9 @@
                     const percPlus = a * (j / 100);
                     const percMinus = a * (l / 100);
 
-                    return this.format(Math.round(h + percPlus - percMinus + i - k));                    
+                    return this.format(Math.round(h + percPlus - percMinus + i - k));
                 },
-                O() {                    
+                O() {
                     const i = this.parse(this.I);
                     const j = this.parse(this.J);
                     const k = this.parse(this.K);
@@ -417,13 +442,13 @@
                             if (type === 'whole') {
                                 newValue = newValue.replace(/[^0-9]/g, '').replace(/^0+(?!$)/, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
                             } else if (type === 'decimal') {
-                                newValue = newValue.replace(/[^0-9.]/g, '').replace(/^0+(?=\d)/, '').replace(/^(\d*\.\d{1,2}).*$/, '$1'); 
+                                newValue = newValue.replace(/[^0-9.]/g, '').replace(/^0+(?=\d)/, '').replace(/^(\d*\.\d{1,2}).*$/, '$1');
 
                                 if (newValue.indexOf('.') !== newValue.lastIndexOf('.')) {
                                     newValue = newValue.slice(0, newValue.lastIndexOf('.'));
                                 }
                             }
-                            
+
                             el.value = newValue;
                         }
 
@@ -432,15 +457,15 @@
                                 el.value = '0';
                             }
                         }
-                        
+
                         el.addEventListener('input', enforceLimit);
                         el.addEventListener('blur', handleEmpty);
-                                                
+
                         enforceLimit();
                     }
                 }
             },/*,
-            methods: {}*/
+                methods: {}*/
         };
 
         // Main Controller
@@ -448,7 +473,7 @@
             data() {
                 return {
                     Variable: "Value",
-                    Calculators: [{id: 1}]
+                    Calculators: [{ id: 1 }]
                 };
             },
             methods: {
