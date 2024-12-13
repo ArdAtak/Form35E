@@ -64,6 +64,8 @@
             font-weight: bold;
         }
 
+        .calculator table tr:last-child td {text-align: right;}
+
         .fine {
             font-weight: normal;
             color: #999999;
@@ -90,6 +92,8 @@
             border: solid 1px #ced4da;
             cursor: not-allowed;
         }
+
+        .btn-calc {margin-right: 20px;}
     </style>
 </head>
 
@@ -99,19 +103,18 @@
 
     <h1>NWMLS Form 35E Calculator Demo - Version 2.0</h1>
 
+    <!-- ========== CALCULATORS ========== -->
     <div id="calculators">
-        <!-- ========== CALCULATORS ========== -->
         <div class="calculators">
             <div v-for="(calc, index) in Calculators" :key="calc.id">
                 <calculator />
             </div>
         </div>
-        
+
         <button class="btn btn-primary btn-add" @click="AddCalculator">Add New Calculator For Comparison</button>
     </div>
 
-    
-
+    <!-- ========== FORMULAS ========== -->
     <div class="calculator" id="calc">
         <h4>NEW PURCHASE PRICE FORMULAS</h4>
 
@@ -128,9 +131,9 @@
         c) This offer’s Escalated Purchase Price (prior to Max Purchase Price) (M):
         <li>M = H + (A * J/100) – (A * L/100) + I – K</li>
         <li>
-            The credits expressed as a percentage of purchase price from both the Competing Offer and this offer are calculated based on the Competing Offer Purchase Price.
-            At closing, the amount Seller pays as percentage credits for this offer will be higher because they will be calculated based on the New Purchase Price.
-            The difference is Seller’s expense of escalation.
+            For purposes of calculating the New Purchase Price only, all credits to Buyer (this offer) expressed as a percentage of the purchase price 
+            shall be calculated based on the purchase price of the Competing Offer. 
+            At closing, the actual amount paid for percentage credits will be different because they will be calculated based on the New Purchase Price.
         </li>
 
         <br />
@@ -261,7 +264,7 @@
                 </tr>
 
                 <tr>
-                    <td class="indent">J. Credits to Buyer <label class="fine">(% of purchase price)</label></td>
+                    <td class="indent">J. Credits to Buyer <label class="fine">(% of Competing Offer purchase price)</label></td>
                     <td>+</td>
                     <td></td>
                     <td><input type="text" v-model.lazy="J" maxlength="4" placeholder="0" v-validate-number="'decimal'" /></td>
@@ -277,7 +280,7 @@
                 </tr>
 
                 <tr>
-                    <td class="indent">L. Credits to Seller <label class="fine">(% of purchase price)</label></td>
+                    <td class="indent">L. Credits to Seller <label class="fine">(% of Competing Offer purchase price)</label></td>
                     <td>-</td>
                     <td></td>
                     <td><input type="text" v-model.lazy="L" maxlength="4" placeholder="0" v-validate-number="'decimal'" /></td>
@@ -332,6 +335,13 @@
                     <td>$</td>
                     <td><input type="text" :value="P" class="calculated" readonly /></td>
                     <td></td>
+                </tr>
+
+                <tr>
+                    <td colspan="5">
+                        <button class="btn btn-primary btn-calc"><i class="bi bi-calculator"></i> Calculate</button>
+                        <button class="btn btn-secondary btn-calc" @click="refresh"><i class="bi bi-arrow-clockwise"></i> Refresh</button>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -429,6 +439,19 @@
                 },
                 format(value) {
                     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                },
+                refresh() {
+                    this.A = 0;
+                    this.B = 0;
+                    this.C = 0;
+                    this.D = 0;
+                    this.E = 0;
+                    this.G = 0;
+                    this.I = 0;
+                    this.J = 0;
+                    this.K = 0;
+                    this.L = 0;
+                    this.N = 0;
                 }
             },
             directives: {
