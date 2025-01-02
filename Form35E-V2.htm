@@ -116,6 +116,13 @@
 
     <!-- ========== FORMULAS ========== -->
     <div class="calculator" id="calc">
+        <h4>For formulas, see Form 35E, Appendix 1.</h4>
+        <h6>For more information, see Forms Manuals for Forms 35E, 35EC, and 35EN.</h6>
+    </div>
+
+
+    <!---
+    <div class="calculator" id="calc">
         <h4>NEW PURCHASE PRICE FORMULAS</h4>
 
         a) Competing Offer Net Purchase Price (F):
@@ -148,6 +155,7 @@
         <li>This offer’s New Purchase Price (P) will be the same number as the Maximum Purchase Price (N).</li>
         <li>This offer’s Net Price (O) will be: O = N + (N * L/100) – (N * J/100) – I + K</li>
     </div>
+    --->
 
     <!-- ========== TEMPLATES ========== -->
     <template id="calculator-template">
@@ -215,7 +223,7 @@
                     <td>
                         F. Competing Offer Net Purchase Price
                         <br />
-                        <label class="fine">(see <a href="#calc">Formula [a]</a>)</label>
+                        <label class="fine">(see Formula in Form 35E, Appendix 1)</label>
                     </td>
                     <td></td>
                     <td>$</td>
@@ -239,7 +247,7 @@
                     <td>
                         H. Escalated Base
                         <br />
-                        <label class="fine">(this offer - see <a href="#calc">Formula [b]</a>)</label>
+                        <label class="fine">(see Formula in Form 35E, Appendix 1)</label>
                     </td>
                     <td></td>
                     <td>$</td>
@@ -293,7 +301,7 @@
                     <td>
                         M. Escalated Purchase Price
                         <br />
-                        <label class="fine">(this offer – prior to Max Purchase Price limit<br />See <a href="#calc">Formula [c]</a>)</label>
+                        <label class="fine">(see Formula in Form 35E, Appendix 1)</label>
                     </td>
                     <td></td>
                     <td>$</td>
@@ -317,7 +325,7 @@
                     <td>
                         O. Net Price
                         <br />
-                        <label class="fine">(this offer – including Max Purchase Price<br />See <a href="#calc">Formulas [d] & [e]</a>)</label>
+                        <label class="fine">(see Formula in Form 35E, Appendix 1)</label>
                     </td>
                     <td></td>
                     <td>$</td>
@@ -329,7 +337,7 @@
                     <td>
                         P. New Purchase Price
                         <br />
-                        <label class="fine">(this offer - see <a href="#calc">Formulas [d] & [e])</a></label>
+                        <label class="fine">(see Formula in Form 35E, Appendix 1)</label>
                     </td>
                     <td></td>
                     <td>$</td>
@@ -487,8 +495,8 @@
                         enforceLimit();
                     }
                 }
-            },/*,
-                methods: {}*/
+            },
+            /* methods: {} */
         };
 
         // Main Controller
